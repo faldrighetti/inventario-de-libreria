@@ -1,0 +1,9 @@
+# Archivos de compilación
+bin/
+obj/
+
+.vscode/
+
+*.code-workspace
+
+InventarioDeLibreria.csproj
