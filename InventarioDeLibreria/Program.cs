@@ -18,7 +18,7 @@ namespace InventarioDeLibreria
 
             //Con la compra de 5 unidades de un producto en promoción, el precio total gozará un 20% de descuento.
 
-            cuaderno.comprarProducto(17, 300, activoMonetario);
+            cuaderno.comprarProducto(15, 300, activoMonetario);
             Console.WriteLine("Ahora tenemos " + cuaderno.cantidad + " cuadernos, y nuestro saldo es de " 
             + activoMonetario.cantidadDisponible);
             //cantidadDisponible = 21900. 300 * 17 = 5100. 27000 - 5100 = 21900, verifica
