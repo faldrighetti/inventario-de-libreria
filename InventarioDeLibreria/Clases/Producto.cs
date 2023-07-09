@@ -4,24 +4,28 @@ using Clases;
 namespace Clases
 {
     public class Producto{
-        public string nombre;
-        public bool enPromocion;
-        public int cantidad;
-        public double precioUnitarioVenta;
-        public double precioUnitarioCosto;
+        private string nombre;
+        private bool enPromocion;
+        private int cantidad;
+        private double precioUnitarioVenta;
+        private double precioUnitarioCosto;
 
         public void comprarProducto(int cantidadAComprar, double precioUnitarioCosto, Dinero dinero){
             double montoCompra = cantidadAComprar * precioUnitarioCosto;
-            if(dinero.cantidadDisponible >= montoCompra){
+            double dineroEnCuenta = dinero.obtenerCantidadDisponible();
+            if(dineroEnCuenta >= montoCompra){
                 cantidad += cantidadAComprar;
-                dinero.cantidadDisponible -= montoCompra;
+                dineroEnCuenta -= montoCompra;
+                dinero.establecerCantidadDisponible(dineroEnCuenta);
             } 
             else{
+                cantidadAComprar = 0;
                 Console.WriteLine("No contamos con fondos suficientes para llevar a cabo esta compra.");
             }
         }
 
         public void venderProducto(int cantidadVendida, double precioUnitarioVenta, Dinero dinero){
+            double dineroEnCuenta = dinero.obtenerCantidadDisponible();
             if(cantidadVendida <= cantidad){
                 double precioVenta = cantidadVendida * precioUnitarioVenta;
                 double ratio = 0.2;
@@ -29,9 +33,11 @@ namespace Clases
                     precioVenta = precioVenta * (1 - ratio);
                 }
                 cantidad -= cantidadVendida;
-                dinero.cantidadDisponible += precioVenta;
+                dineroEnCuenta += precioVenta;
+                dinero.establecerCantidadDisponible(dineroEnCuenta);
             }
             else{
+                cantidadVendida = 0;
                 Console.WriteLine("No contamos con suficiente stock para concretar esta venta.");
             }
         }
@@ -49,14 +55,19 @@ namespace Clases
         cantidadProducto, precioUnitarioVentaProducto){
             precioUnitarioCosto = precioUnitarioCostoProducto;
         }
+
+        public override string ToString()
+        {
+            return $"Producto: {nombre}, En promoción: {enPromocion}, Cantidad: {cantidad}.\nPrecio unitario de venta: {precioUnitarioVenta}, Precio unitario de costo: {precioUnitarioCosto}";
+        }
+
         #endregion
     }
 }
 
 /*TODO:
 -Cambiar los atributos públicos a privados y modificar las funciones en consecuencia
--Atrapar los movimientos de dinero en la clase dinero, relacionándolos con Program y Producto
 -Agregar producto
--Crear HTML con 4 opciones select: Mostrar stock, comprar a proveedor (verificar si ya existe el producto y sino, crearlo), vender con tarjeta, vender con efectivo.
+-Crear HTML con 4 opciones select: Mostrar stock, comprar a proveedor (verificar si ya existe el producto y sino, crearlo), vender producto.
 -Relacionar el HTML con los archivos .cs
 */
