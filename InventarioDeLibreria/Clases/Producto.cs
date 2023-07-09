@@ -1,30 +1,40 @@
 using System;
+using Clases;
 
 namespace Clases
 {
     public class Producto{
         public string nombre;
-        public double precio;
+        public double precioUnitarioCosto;
+        public double precioUnitarioVenta;
         public int cantidad;
         public bool aplicaDescuento;
 
-        public int agregarProducto(){
+        public int comprarProducto(){
             cantidad++;
             return cantidad;
         }
 
-        public int venderProducto(){
+        public int venderProducto(double precioUnitarioVenta, int cantidad){
+            double precioVenta = cantidad * precioUnitarioVenta;
             cantidad--;
             return cantidad;
         }
 
-        public double pagarConEfectivo()
+        public double cobrarEnEfectivo()
         {
             double ratio = 0.2;
             if (aplicaDescuento){
-                precio = precio * (1 - ratio);
+                precioUnitarioVenta = precioUnitarioVenta * (1 - ratio);
             }
-            return precio;
+            return precioUnitarioVenta;
+        }
+
+        public Producto(string nombreProducto, float precioUnitarioVentaProducto, int cantidadProducto, bool aplicaDescuentoProducto){
+            nombre = nombreProducto;
+            precioUnitarioVenta = precioUnitarioVentaProducto;
+            cantidad = cantidadProducto;
+            aplicaDescuento = aplicaDescuentoProducto;
         }
     }
 }
