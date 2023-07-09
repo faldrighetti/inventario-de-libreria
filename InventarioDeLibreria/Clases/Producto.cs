@@ -4,37 +4,48 @@ using Clases;
 namespace Clases
 {
     public class Producto{
+
         public string nombre;
         public double precioUnitarioCosto;
         public double precioUnitarioVenta;
         public int cantidad;
         public bool aplicaDescuento;
 
-        public int comprarProducto(){
-            cantidad++;
+        public int comprarProducto(double precioUnitarioProveedor, int cantidadAComprar){
+            double precioCompra = cantidadAComprar * precioUnitarioProveedor;
+            cantidad += cantidadAComprar;
             return cantidad;
         }
 
-        public int venderProducto(double precioUnitarioVenta, int cantidad){
-            double precioVenta = cantidad * precioUnitarioVenta;
-            cantidad--;
+        public int venderProducto(int cantidadVendida){
+            cantidad -= cantidadVendida;
             return cantidad;
         }
 
-        public double cobrarEnEfectivo()
-        {
+        public double cobrarEnEfectivo(double precioUnitarioVenta, int cantidadVendida){
+            double precioVenta = cantidadVendida * precioUnitarioVenta;
             double ratio = 0.2;
             if (aplicaDescuento){
-                precioUnitarioVenta = precioUnitarioVenta * (1 - ratio);
+                precioVenta = precioUnitarioVenta * (1 - ratio);
             }
-            return precioUnitarioVenta;
+
+            return precioVenta;
         }
 
-        public Producto(string nombreProducto, float precioUnitarioVentaProducto, int cantidadProducto, bool aplicaDescuentoProducto){
+        public double cobrarConTarjeta(double precioUnitarioVenta, int cantidadVendida){
+            double precioVenta = cantidadVendida * precioUnitarioVenta;
+            return precioVenta;
+        }
+
+        public Producto(string nombreProducto, bool aplicaDescuentoProducto, int cantidadProducto, float precioUnitarioVentaProducto){
             nombre = nombreProducto;
-            precioUnitarioVenta = precioUnitarioVentaProducto;
-            cantidad = cantidadProducto;
             aplicaDescuento = aplicaDescuentoProducto;
+            cantidad = cantidadProducto;            
+            precioUnitarioVenta = precioUnitarioVentaProducto;
+        }
+
+        public Producto(string nombreProducto, bool aplicaDescuentoProducto, int cantidadProducto, float precioUnitarioVentaProducto, float precioUnitarioCostoProducto):this(nombreProducto, aplicaDescuentoProducto, cantidadProducto, precioUnitarioVentaProducto){
+            precioUnitarioCosto = precioUnitarioCostoProducto;
         }
     }
 }

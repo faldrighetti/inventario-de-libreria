@@ -8,9 +8,9 @@ namespace InventarioDeLibreria
         static void Main(string[] args)
         {
             Dinero dineroEnCaja = new Dinero(75000);
-            Producto boligrafo = new Producto("Bolígrafo", 45, 200, false);
+            Producto boligrafo = new Producto("Bolígrafo", false, 200, 80, 35);
             //Ver si a la variable del objeto la llamo boligrafo o producto1
-            boligrafo.venderProducto(45, 3);
+            boligrafo.venderProducto(3);
             Console.WriteLine(boligrafo.cantidad);
         }
     }

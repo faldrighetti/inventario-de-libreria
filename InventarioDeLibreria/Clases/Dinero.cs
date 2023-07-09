@@ -2,11 +2,10 @@ using System;
 
 namespace Clases{
     public class Dinero{
-        public long cantidadDisponible;
-        public double precioTotal;
+        public double cantidadDisponible;
 
         public Dinero(long dineroEnCaja){
-            dineroEnCaja = cantidadDisponible;
+            cantidadDisponible = dineroEnCaja;
         }
     }
 }
