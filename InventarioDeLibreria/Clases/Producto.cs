@@ -6,46 +6,48 @@ namespace Clases
     public class Producto{
 
         public string nombre;
-        public double precioUnitarioCosto;
-        public double precioUnitarioVenta;
+        public bool enPromocion;
         public int cantidad;
-        public bool aplicaDescuento;
+        public double precioUnitarioVenta;
+        public double precioUnitarioCosto;
 
-        public int comprarProducto(double precioUnitarioProveedor, int cantidadAComprar){
-            double precioCompra = cantidadAComprar * precioUnitarioProveedor;
+        public void comprarProducto(int cantidadAComprar, double precioUnitarioCosto, Dinero dinero){
             cantidad += cantidadAComprar;
-            return cantidad;
+            double montoCompra = cantidadAComprar * precioUnitarioCosto;
+            dinero.cantidadDisponible -= montoCompra;
         }
 
-        public int venderProducto(int cantidadVendida){
-            cantidad -= cantidadVendida;
-            return cantidad;
-        }
-
-        public double cobrarEnEfectivo(double precioUnitarioVenta, int cantidadVendida){
+        public double venderProducto(int cantidadVendida, double precioUnitarioVenta, Dinero dinero){
             double precioVenta = cantidadVendida * precioUnitarioVenta;
             double ratio = 0.2;
-            if (aplicaDescuento){
-                precioVenta = precioUnitarioVenta * (1 - ratio);
+            if (enPromocion && cantidadVendida >= 5){
+                precioVenta = precioVenta * (1 - ratio);
             }
-
+            cantidad -= cantidadVendida;
+            dinero.cantidadDisponible += precioVenta;
             return precioVenta;
         }
 
-        public double cobrarConTarjeta(double precioUnitarioVenta, int cantidadVendida){
-            double precioVenta = cantidadVendida * precioUnitarioVenta;
-            return precioVenta;
-        }
-
-        public Producto(string nombreProducto, bool aplicaDescuentoProducto, int cantidadProducto, float precioUnitarioVentaProducto){
+        #region Constructores
+        public Producto(string nombreProducto, bool enPromocionProducto, int cantidadProducto, float precioUnitarioVentaProducto){
             nombre = nombreProducto;
-            aplicaDescuento = aplicaDescuentoProducto;
+            enPromocion = enPromocionProducto;
             cantidad = cantidadProducto;            
             precioUnitarioVenta = precioUnitarioVentaProducto;
         }
 
-        public Producto(string nombreProducto, bool aplicaDescuentoProducto, int cantidadProducto, float precioUnitarioVentaProducto, float precioUnitarioCostoProducto):this(nombreProducto, aplicaDescuentoProducto, cantidadProducto, precioUnitarioVentaProducto){
+        public Producto(string nombreProducto, bool enPromocionProducto, int cantidadProducto, float precioUnitarioVentaProducto,
+        float precioUnitarioCostoProducto):this(nombreProducto, enPromocionProducto,
+        cantidadProducto, precioUnitarioVentaProducto){
             precioUnitarioCosto = precioUnitarioCostoProducto;
         }
+        #endregion
     }
 }
+
+/*TODO:
+-Cambiar los atributos públicos a privados y modificar las funciones en consecuencia
+-Atrapar los movimientos de dinero en la clase dinero, relacionándolos con Program y Producto
+-Crear HTML con 4 opciones select: Mostrar stock, comprar a proveedor (verificar si ya existe el producto y sino, crearlo), vender con tarjeta, vender con efectivo.
+-Relacionar el HTML con los archivos .cs
+*/

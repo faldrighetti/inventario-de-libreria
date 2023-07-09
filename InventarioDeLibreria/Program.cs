@@ -5,28 +5,29 @@ namespace InventarioDeLibreria
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            Dinero dineroEnCaja = new Dinero(75000);
-            Producto boligrafo = new Producto("Bolígrafo", false, 200, 80, 35);
-            //Ver si a la variable del objeto la llamo boligrafo o producto1
-            boligrafo.venderProducto(3);
-            Console.WriteLine(boligrafo.cantidad);
+        static void Main(string[] args){
+            Producto boligrafo = new Producto("Bolígrafos", false, 200, 100, 35);
+            Producto lapiz = new Producto("Lápices", false, 180, 80, 20);
+            Producto resma = new Producto("Resmas de papel A4", true, 50, 2300, 970);
+            Producto carpeta = new Producto("Carpetas N°3", true, 150, 1200, 250);
+            Producto cuaderno = new Producto("Cuadernos A4", true, 170, 1000, 300);
+            Producto cintaAdhesiva = new Producto("Cintas adhesivas", false, 60, 500, 150);
+            Producto abrochadora = new Producto("Abrochadoras", true, 40, 5000, 1100);
+            Producto notasAdhesivas = new Producto("Blocs de notas adhesivas", true, 250, 2500, 700);
+            Dinero activoMonetario = new Dinero(27000);
+
+            //Con la compra de 5 unidades de un producto en promoción, el precio total gozará un 20% de descuento.
+
+            cuaderno.comprarProducto(17, 300, activoMonetario);
+            Console.WriteLine("Ahora tenemos " + cuaderno.cantidad + " cuadernos, y nuestro saldo es de " 
+            + activoMonetario.cantidadDisponible);
+            //cantidadDisponible = 21900. 300 * 17 = 5100. 27000 - 5100 = 21900, verifica
+            cuaderno.venderProducto(13, 1000, activoMonetario);
+            Console.WriteLine("Ahora tenemos " + cuaderno.cantidad + " cuadernos, y nuestro saldo es de " 
+            + activoMonetario.cantidadDisponible);
+            //cantidadDisponible = 32300, la venta de 13 cuadernos se dio por 10400 pesos. El 80% de 13000 es 10400, verifica. 
         }
     }
 }
 
-/*
-Artículos de papelería (string nombre, float precioUnitarioVenta, int cantidad, bool aplica descuento):
-
-Bolígrafo 45 200 false
-Lápiz 35 180 false
-Resma de impresora 2300 50 true
-Carpeta A4 1500 80 true
-Carpeta N°3 1200 150 true
-Cuaderno A4 1000 170 true
-Cinta adhesiva 500 60 false
-Abrochadora 5000 40 true
-Notas adhesivas 2500 250 true
-
-*/
+// nombre, aplicaDescuento, cantidad, unitarioVenta, unitarioCosto
