@@ -16,7 +16,7 @@ namespace InventarioDeLibreria
             Producto notasAdhesivas = new Producto("Blocs de notas adhesivas", true, 250, 2500, 700);
             Dinero activoMonetario = new Dinero(27000);
 
-            //Con la compra de 5 unidades de un producto en promoción, el precio total gozará un 20% de descuento.
+            //Con la compra de 5 unidades de un producto en promoción, el precio total tendrá un 20% de descuento.
 
             cuaderno.comprarProducto(15, 200, activoMonetario);
             notasAdhesivas.venderProducto(10, 2500, activoMonetario);
