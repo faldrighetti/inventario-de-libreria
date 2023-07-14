@@ -66,8 +66,9 @@ namespace Clases
 }
 
 /*TODO:
--Cambiar los atributos públicos a privados y modificar las funciones en consecuencia
--Agregar producto
--Crear HTML con 4 opciones select: Mostrar stock, comprar a proveedor (verificar si ya existe el producto y sino, crearlo), vender producto.
--Relacionar el HTML con los archivos .cs
+-Crear botones para comprar a proveedor, vender producto.
+-Aparte, mostrar el saldo actual en cuenta y crear un botón para agregar producto.
+-Hacer que el razor muestre una tabla con los productos y cada categoría. Una fila para cada producto,
+ columnas con encabezados Nombre, Cantidad, Aplica descuento, Precio unitario Venta, Precio unitario costo
+-Relacionar el razor con los archivos .cs
 */
