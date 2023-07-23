@@ -3,7 +3,7 @@
 <h1>Catálogo del proveedor</h1>
 <hr>
 
-<a class="btn btn-secondary">Comprar productos para inventario</a>
+<a class="btn btn-secondary" @onclick="mostrarAlertCompra">Comprar productos para inventario</a>
 
 <table class="table">
     <thead>
@@ -29,7 +29,13 @@
 <div class="alert alert-secondary" role="alert">
     <h4 class="alert-heading">Comprar productos</h4>
     <select placeholder="Producto" id="select-producto"></select> <input type="number" placeholder="Cantidad">
-    <button id="Procesar-compra">Comprar</button>
+    <button id="procesar-compra" class="btn btn-dark">Comprar</button>
     <hr>
     <p class="mb-0">Total: $<strong id="total-venta"></strong> </p>
 </div>
+
+@code{
+    private void mostrarAlertCompra(){
+        Console.Write("hola");
+    }
+}
