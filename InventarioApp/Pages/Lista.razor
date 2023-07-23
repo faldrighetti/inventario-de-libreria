@@ -1,8 +1,11 @@
 @page "/lista"
+@using Clases
+@using InventarioDeLibreria
 
-<h1>Lista</h1>
-
-<h3>Lista de Productos</h3>
+<h1>Catálogo de productos</h1>
+<hr>
+<a class="btn btn-success">Vender producto</a>
+<a class="btn btn-dark">Modificar precio</a>
 
 <!--
 <ul>
@@ -13,4 +16,52 @@
 </ul>
 -->
 
-<!-- La página se abre en la terminal: ubicarse en la carpeta InventarioApp y escribir dotnet watch -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>En promoción</th>
+        </tr>
+    </thead>
+    <tbody>
+            <!--@foreach (var producto in listaProductos){
+        <tr>
+            <td>@producto.nombre</td>
+            <td>@producto.cantidad</td>
+            <td>@producto.precioUnitarioVenta</td>
+            <td>@(producto.enPromocion ? "Sí" : "No")</td>
+        </tr>
+    }           
+        -->
+    </tbody>
+</table>
+
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Vender producto</h4>
+    <select placeholder="Producto" id="select-producto"></select> <input type="number" placeholder="Cantidad">
+    <button id="boton-procesar">Vender</button>
+    <hr>
+    <p class="mb-0">Total: $<strong id="total-venta"></strong> </p>
+</div>
+
+<div class="alert alert-dark" role="alert">
+    <h4 class="alert-heading">Modificar precio</h4>
+    <select placeholder="Producto" id="select-producto"></select> <input type="number" placeholder="Precio unitario nuevo">
+    <button id="boton-modificar-precio">Modificar</button>
+</div>
+
+@code {
+    private List<Producto> listaProductos = new List<Producto>
+    {
+        new Producto("Bolígrafos", false, 200, 100, 35),
+        new Producto("Lápices", false, 180, 80, 20),
+        new Producto("Resmas de papel A4", true, 50, 2300, 970),
+        new Producto("Carpetas N°3", true, 150, 1200, 250),
+        new Producto("Cuadernos A4", true, 170, 1000, 300),
+        new Producto("Cintas adhesivas", false, 60, 500, 150),
+        new Producto("Abrochadoras", true, 40, 3700, 1100),
+        new Producto("Blocs de notas adhesivas", true, 250, 2500, 700)
+    };
+}

@@ -1,0 +1,35 @@
+@page "/proveedor"
+
+<h1>Catálogo del proveedor</h1>
+<hr>
+
+<a class="btn btn-secondary">Comprar productos para inventario</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+        </tr>
+    </thead>
+    <tbody>
+            <!--@foreach (var producto in listaProductos){
+        <tr>
+            <td>@producto.nombre</td>
+            <td>@producto.cantidad</td>
+            <td>@producto.precioUnitarioVenta</td>
+        </tr>
+    }           
+        -->
+    </tbody>
+</table>
+
+
+<div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading">Comprar productos</h4>
+    <select placeholder="Producto" id="select-producto"></select> <input type="number" placeholder="Cantidad">
+    <button id="Procesar-compra">Comprar</button>
+    <hr>
+    <p class="mb-0">Total: $<strong id="total-venta"></strong> </p>
+</div>
