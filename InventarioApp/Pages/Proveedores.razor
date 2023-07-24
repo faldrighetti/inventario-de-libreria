@@ -1,4 +1,5 @@
 @page "/proveedor"
+@using Clases
 
 <h1>Catálogo del proveedor</h1>
 <hr>
@@ -25,17 +26,23 @@
     </tbody>
 </table>
 
-
-<div class="alert alert-secondary" role="alert">
-    <h4 class="alert-heading">Comprar productos</h4>
-    <select placeholder="Producto" id="select-producto"></select> <input type="number" placeholder="Cantidad">
-    <button id="procesar-compra" class="btn btn-dark">Comprar</button>
-    <hr>
-    <p class="mb-0">Total: $<strong id="total-venta"></strong> </p>
-</div>
+@if(mostrarCompra){
+    <div class="alert alert-secondary" role="alert">
+        <h4 class="alert-heading">Comprar productos</h4>
+        <select placeholder="Producto" id="select-producto"></select>
+        <input type="number" placeholder="Cantidadw" @bind="calculos.numero1">
+        <input type="number" placeholder="Cantidad" @bind="calculos.numero2">
+        <button id="procesar-compra" class="btn btn-dark">Comprar</button>
+        <hr>
+        <p class="mb-0"><strong>Total: $@calculos.productoMultiplicacion()</strong></p>
+    </div>
+}
 
 @code{
+    private Calculos calculos = new Calculos();
+    private bool mostrarCompra = false;
+
     private void mostrarAlertCompra(){
-        Console.Write("hola");
+        mostrarCompra = !mostrarCompra;
     }
 }

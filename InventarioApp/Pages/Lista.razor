@@ -4,7 +4,7 @@
 
 <h1>Catálogo de productos</h1>
 <hr>
-<a class="btn btn-success" @onclick="mostrarAlertCompra">Vender producto</a>
+<a class="btn btn-success" @onclick="mostrarAlertVenta">Vender producto</a>
 <a class="btn btn-dark" @onclick="mostrarAlertModificacion">Modificar precio</a>
 
 <table class="table">
@@ -29,30 +29,40 @@
     </tbody>
 </table>
 
-<div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Vender producto</h4>
-    <select placeholder="Producto" id="select-producto"></select>
-    <input type="number" placeholder="Cantidad">
-    <button id="boton-procesar" class="btn btn-success">Vender</button>
-    <hr>
-    <p class="mb-0">Total: $<strong id="total-venta"></strong> </p>
-</div>
+@if(mostrarVenta){
+   <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Vender producto</h4>
+        <select placeholder="Producto" id="select-producto"></select>
+        <input type="number" placeholder="Cantidadw" @bind="calculos.numero1">
+        <input type="number" placeholder="Cantidad" @bind="calculos.numero2">
+        <button id="boton-procesar" class="btn btn-success">Vender</button>
+        <hr>
+        <p class="mb-0"><strong>Total: $@calculos.productoMultiplicacion()</strong></p>
+    </div>
+}
 
-<div class="alert alert-dark" role="alert">
-    <h4 class="alert-heading">Modificar precio</h4>
-    <select placeholder="Producto" id="select-producto"></select> <input type="number" placeholder="Precio unitario nuevo">
-    <button id="boton-modificar-precio" class="btn btn-dark">Modificar</button>
-</div>
+@if(mostrarModificacion){
+    <div class="alert alert-dark" role="alert">
+        <h4 class="alert-heading">Modificar precio</h4>
+        <select placeholder="Producto" id="select-producto"></select>
+        <input type="number" placeholder="Precio unitario nuevo">
+        <button id="boton-modificar-precio" class="btn btn-dark">Modificar</button>
+    </div>
+}
 
-@code {
+@code{
+    private Calculos calculos = new Calculos();
+
+    private bool mostrarVenta = false;
+    private bool mostrarModificacion = false;
+    private void mostrarAlertVenta(){
+        mostrarVenta = !mostrarVenta;
+    }
 
     private void mostrarAlertModificacion(){
-
+        mostrarModificacion = !mostrarModificacion;
     }
 
-    private void mostrarAlertCompra(){
-
-    }
     private List<Producto> listaProductos = new List<Producto>
     {
         new Producto("Bolígrafos", false, 200, 100, 35),
@@ -65,3 +75,10 @@
         new Producto("Blocs de notas adhesivas", true, 250, 2500, 700)
     };
 }
+
+<!--TODO:
+-Hacer que el razor muestre una tabla con los productos y cada categoría. Una fila para cada producto,
+ columnas con encabezados Nombre, Cantidad, Aplica descuento, Precio unitario Venta, Precio unitario costo
+-Que el select tome los elementos de la lista y que el precio de uno de ellos se calcule al elegir su option
+correspondiente. Si pongo abrochadoras y cantidad 35, que abajo salga 129500 (3700 * 35).
+*/-->

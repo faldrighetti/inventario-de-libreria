@@ -64,11 +64,3 @@ namespace Clases
         #endregion
     }
 }
-
-/*TODO:
--Crear botones para comprar a proveedor, vender producto.
--Aparte, mostrar el saldo actual en cuenta y crear un botón para agregar producto.
--Hacer que el razor muestre una tabla con los productos y cada categoría. Una fila para cada producto,
- columnas con encabezados Nombre, Cantidad, Aplica descuento, Precio unitario Venta, Precio unitario costo
--Relacionar el razor con los archivos .cs
-*/
